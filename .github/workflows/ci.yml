@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v1
 
@@ -25,6 +25,25 @@ jobs:
       - name: Test
         working-directory: .
         run: ./gradlew test
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Copy repo to VM
+        uses: appleboy/scp-action@master
+        env:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.key }}
+        with:
+          source: "./"
+          target: "~/prod"
+
+
 
 
 
