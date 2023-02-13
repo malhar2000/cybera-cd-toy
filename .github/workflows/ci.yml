@@ -9,6 +9,7 @@ jobs:
   build-and-test:
     runs-on: self-hosted-rafid
     steps:
+      - uses: rtCamp/action-cleanup@master
       - uses: actions/checkout@v1
 
       - name: Setup Java
@@ -30,6 +31,7 @@ jobs:
     needs: build-and-test
     runs-on: self-hosted-rafid
     steps:
+      - uses: rtCamp/action-cleanup@master
       - uses: actions/checkout@master
 
       - name: Copy repo to VM
