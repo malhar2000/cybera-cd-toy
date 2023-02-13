@@ -27,7 +27,7 @@ jobs:
         run: ./gradlew test
 
   deploy:
-    needs: build
+    needs: build-and-test
     runs-on: self-hosted-rafid
     steps:
       - uses: actions/checkout@master
