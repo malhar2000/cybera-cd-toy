@@ -19,8 +19,8 @@ jobs:
       - name: Build
         working-directory: .
         run: |
-        chmod +x gradlew
-        ./gradlew build -x test
+          chmod +x gradlew
+          ./gradlew build -x test
 
       - name: Test
         working-directory: .
