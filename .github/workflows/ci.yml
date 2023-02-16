@@ -27,23 +27,23 @@ jobs:
         working-directory: .
         run: ./gradlew test
 
-#  deploy:
-#    needs: build-and-test
-#    runs-on: self-hosted-lab-runner
-#    steps:
-#      - uses: rtCamp/action-cleanup@master
-#      - uses: actions/checkout@master
-#
-#      - name: Copy repo to VM
-#        uses: appleboy/scp-action@master
-#        env:
-#          HOST: ${{ secrets.HOST }}
-#          USERNAME: ${{ secrets.USERNAME }}
-#          PORT: ${{ secrets.PORT }}
-#          KEY: ${{ secrets.KEY }}
-#        with:
-#          source: "./"
-#          target: "~/prod"
+  deploy:
+    needs: build-and-test
+    runs-on: self-hosted-lab
+    steps:
+      - uses: rtCamp/action-cleanup@master
+      - uses: actions/checkout@master
+
+      - name: Copy repo to VM
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.KEY }}
+        with:
+          source: "./"
+          target: "~/prod"
 ##
 #      - name: Deploy
 #        uses: appleboy/ssh-action@master
